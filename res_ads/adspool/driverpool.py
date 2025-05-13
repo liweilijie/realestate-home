@@ -74,5 +74,5 @@ class AdsWebDriverPool:
             except Exception:
                 pass
             # 关闭 AdsPower 浏览器实例
-            close_url = f"http://local.adspower.net:50325/api/v1/browser/stop?user_id={user_id}&api_key={self.api_key}"
+            close_url = f"http://local.adspower.net:50325/api/v1/browser/stop?user_id={user_id}&api_key={settings.get('ADS_API_KEY')}"
             requests.get(close_url)

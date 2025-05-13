@@ -6,7 +6,6 @@ import scrapy
 import time
 import re
 from urllib.parse import urljoin
-import dateparser
 
 from scrapy import Selector
 from selenium import webdriver

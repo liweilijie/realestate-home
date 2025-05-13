@@ -8,12 +8,12 @@ It leverages a combination of technologies and services to reliably extract, org
 
 1. Data Crawling Engine:
 
-Utilizes Scrapy, Redis, Selenium, and AdsPower to perform robust data extraction from target property listing platforms.
+   Utilizes Scrapy, Redis, Selenium, and AdsPower to perform robust data extraction from target property listing platforms.
 
 2. Rule Generation:
 
-Custom rule generators are used to define how and where to crawl specific types of data, supporting dynamic and complex site structures.
+   Custom rule generators are used to define how and where to crawl specific types of data, supporting dynamic and complex site structures.
 
 3. Rule-Based Data Scheduling:
 
-Parsed rules are used to identify valid data targets and push them into Redis for distributed and fault-tolerant processing.
+   Parsed rules are used to identify valid data targets and push them into Redis for distributed and fault-tolerant processing.
