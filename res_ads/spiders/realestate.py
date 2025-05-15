@@ -119,6 +119,9 @@ class RealestateSpider(scrapy.Spider):
     def process_page(self, response):
         self.ensure_connection()
         current_page = int(self.r.get(self.current_page_key) or 1)
+        if current_page >= 80:
+            logger.warning("current_page: %s >= 80.", current_page)
+            return None
         logger.info("process_page url: %s", response.url)
         user_id, driver = self.driver_pool.get_driver()
         self.close_other_tabs(driver)
@@ -134,8 +137,8 @@ class RealestateSpider(scrapy.Spider):
                 page_source = driver.page_source
                 sel = Selector(text=page_source)
 
-                with open("p1", "w", encoding="utf-8") as f:
-                    f.write(page_source)
+                # with open("p1", "w", encoding="utf-8") as f:
+                #     f.write(page_source)
 
                 data = {
                     "url": None,
@@ -176,6 +179,10 @@ class RealestateSpider(scrapy.Spider):
 
                 # 更新 Redis 中的当前页码
                 current_page += 1
+                if current_page > 80:
+                    logger.warning("current_page: %s > 80.", current_page)
+                    return None
+
                 self.r.set(self.current_page_key, current_page)
                 # 点击“下一页”按钮
                 try:
@@ -200,7 +207,6 @@ class RealestateSpider(scrapy.Spider):
 
         finally:
             self.driver_pool.release_driver(user_id, driver)
-
 
     def ensure_connection(self):
         try:
